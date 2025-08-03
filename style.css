@@ -1,0 +1,163 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Inter", sans-serif;
+  background-color: #0d0d0f;
+  color: #e0e0e0;
+}
+
+/* Лого */
+#logo-box {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.7);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 2px solid #39FF14;
+  z-index: 1100;
+}
+
+#logo-box img {
+  height: 32px;
+  width: auto;
+}
+
+#logo-box span {
+  font-weight: 800;
+  font-size: 18px;
+  color: #39FF14;
+}
+
+/* Карта */
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  /* затемнение карты */
+}
+
+/* Форма */
+#form-container {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -35%) scale(0.9);
+  background: rgba(20, 20, 25, 0.9);
+  padding: 25px 30px;
+  border-radius: 16px;
+  border: 2px solid #39FF14; /* Зеленая рамка */
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.6);
+  z-index: 1000;
+  width: 320px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+#form-container.show {
+  opacity: 1;
+  transform: translate(-50%, -35%) scale(1);
+}
+
+.hidden {
+  display: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form label {
+  align-self: flex-start;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+form input, form textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+}
+
+form textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+form button {
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  background: #8B5CF6;
+  color: white;
+  transition: 0.3s;
+}
+
+form button[type="submit"]:hover {
+  background: #06B6D4;
+}
+
+form button#cancel {
+  background: #f44336;
+}
+
+form button#cancel:hover {
+  background: #d32f2f;
+}
+
+/* Аватарки */
+.avatar-marker {
+  border: 2px solid #06B6D4;
+  border-radius: 50%;
+  background: white;
+}
+/* style.css — добавим анимацию маркеров */
+.marker-animate {
+  animation: popIn 0.4s ease forwards;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+/* style.css — добавляем градиентный фон под карту */
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: relative;
+}
+
+#map:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #39FF14, #8B5CF6);
+  z-index: -2; /* ниже карты */
+}
+
+.leaflet-tile-pane {
+  opacity: 0.75; /* делаем тайлы полупрозрачными, чтобы видно был градиент */
+}

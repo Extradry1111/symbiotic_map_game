@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Symbiotic Map Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <!-- Лого -->
+  <div id="logo-box">
+    <img src="images/logo.png" alt="Symbiotic Logo" />
+    <span>Symbiotic Map Game</span>
+  </div>
+
+  <!-- Карта -->
+  <div id="map"></div>
+
+  <!-- Форма -->
+  <div id="form-container" class="hidden">
+    <form id="marker-form">
+      <label for="twitter">X (Twitter) Handle:</label>
+      <input type="text" id="twitter" placeholder="@username" required />
+
+      <label for="discordRole">Discord Role:</label>
+      <input type="text" id="discordRole" required />
+
+      <label for="reason">Why you love the project:</label>
+      <textarea id="reason" required></textarea>
+
+      <div class="buttons">
+        <button type="submit">Add Marker</button>
+        <button type="button" id="cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
