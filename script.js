@@ -68,7 +68,7 @@ markerForm.addEventListener('submit', async e => {
 
   const existing = await db.collection("markers").where("twitter", "==", twitterHandle).get();
   if (!existing.empty) {
-    alert("Этот Twitter уже добавлен на карту!");
+    alert("This Twitter already added on the map!");
     return;
   }
 
@@ -125,7 +125,7 @@ async function addMarkerToMap(docId, data) {
 
   
   if (currentTwitter && currentTwitter === data.twitter) {
-    popupContent += `<br/><button class="delete-marker" data-id="${docId}" style="margin-top:5px;background:#f44336;color:white;border:none;padding:4px 8px;border-radius:5px;cursor:pointer;">Удалить</button>`;
+    popupContent += `<br/><button class="delete-marker" data-id="${docId}" style="margin-top:5px;background:#f44336;color:white;border:none;padding:4px 8px;border-radius:5px;cursor:pointer;">Delete</button>`;
   }
 
   marker.bindPopup(popupContent);
