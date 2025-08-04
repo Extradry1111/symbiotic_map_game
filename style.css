@@ -7,7 +7,6 @@ body, html {
   color: #e0e0e0;
 }
 
-/* Лого */
 #logo-box {
   position: absolute;
   top: 10px;
@@ -33,15 +32,12 @@ body, html {
   color: #39FF14;
 }
 
-/* Карта */
 #map {
   width: 100%;
   height: 100%;
   z-index: 1;
-  /* затемнение карты */
 }
 
-/* Форма */
 #form-container {
   position: absolute;
   top: 35%;
@@ -126,13 +122,13 @@ form button#cancel:hover {
   background: #d32f2f;
 }
 
-/* Аватарки */
+
 .avatar-marker {
   border: 2px solid #06B6D4;
   border-radius: 50%;
   background: white;
 }
-/* style.css — добавим анимацию маркеров */
+
 .marker-animate {
   animation: popIn 0.4s ease forwards;
 }
@@ -142,7 +138,7 @@ form button#cancel:hover {
   80% { transform: scale(1.1); opacity: 1; }
   100% { transform: scale(1); }
 }
-/* style.css — добавляем градиентный фон под карту */
+
 #map {
   width: 100%;
   height: 100%;
@@ -155,9 +151,9 @@ form button#cancel:hover {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #39FF14, #8B5CF6);
-  z-index: -2; /* ниже карты */
+  z-index: -2; 
 }
 
 .leaflet-tile-pane {
-  opacity: 0.75; /* делаем тайлы полупрозрачными, чтобы видно был градиент */
+  opacity: 0.75; 
 }

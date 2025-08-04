@@ -12,10 +12,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Храним Twitter текущего пользователя, чтобы он мог удалять только свой маркер
 let currentTwitter = null;
 
-// Ограничение карты
 const bounds = [
   [-85, -180],
   [85, 180]
@@ -28,7 +26,6 @@ const map = L.map('map', {
   maxBoundsViscosity: 1.0
 }).setView([20, 0], 2);
 
-// Новый тёмный стиль карты
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
   subdomains: 'abcd',
@@ -40,7 +37,6 @@ const formContainer = document.getElementById('form-container');
 const markerForm = document.getElementById('marker-form');
 const cancelBtn = document.getElementById('cancel');
 
-// Показ формы
 map.on('click', e => {
   selectedLatLng = e.latlng;
   formContainer.classList.remove('hidden');
@@ -48,7 +44,6 @@ map.on('click', e => {
   document.getElementById('twitter').focus();
 });
 
-// Скрытие формы
 cancelBtn.addEventListener('click', () => {
   hideForm();
 });
@@ -60,7 +55,6 @@ function hideForm() {
   selectedLatLng = null;
 }
 
-// Отправка формы
 markerForm.addEventListener('submit', async e => {
   e.preventDefault();
   if (!selectedLatLng) return;
@@ -70,10 +64,8 @@ markerForm.addEventListener('submit', async e => {
   const discordRole = document.getElementById('discordRole').value.trim();
   const reason = document.getElementById('reason').value.trim();
 
-  // Сохраняем текущий Twitter
   currentTwitter = twitterHandle;
 
-  // Проверка уникальности Twitter
   const existing = await db.collection("markers").where("twitter", "==", twitterHandle).get();
   if (!existing.empty) {
     alert("Этот Twitter уже добавлен на карту!");
@@ -95,7 +87,6 @@ markerForm.addEventListener('submit', async e => {
   hideForm();
 });
 
-// Слушаем изменения
 db.collection("markers").onSnapshot(snapshot => {
   snapshot.docChanges().forEach(change => {
     if (change.type === "added") {
@@ -132,7 +123,7 @@ async function addMarkerToMap(docId, data) {
     Reason: ${data.reason}
   `;
 
-  // Кнопка удаления, только если это твой маркер
+  
   if (currentTwitter && currentTwitter === data.twitter) {
     popupContent += `<br/><button class="delete-marker" data-id="${docId}" style="margin-top:5px;background:#f44336;color:white;border:none;padding:4px 8px;border-radius:5px;cursor:pointer;">Удалить</button>`;
   }
@@ -143,7 +134,7 @@ async function addMarkerToMap(docId, data) {
     const btn = document.querySelector('.delete-marker');
     if (btn) {
       btn.addEventListener('click', async () => {
-        if (confirm("Удалить свой маркер?")) {
+        if (confirm("Delete your mark?")) {
           await db.collection("markers").doc(docId).delete();
           map.removeLayer(marker);
         }
@@ -151,8 +142,7 @@ async function addMarkerToMap(docId, data) {
     }
   });
 }
-// Вместо обычного темного стиля оставим полупрозрачный OSM
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors',
-  opacity: 0.75 // полупрозрачность тайлов
+  opacity: 0.75 
 }).addTo(map);
